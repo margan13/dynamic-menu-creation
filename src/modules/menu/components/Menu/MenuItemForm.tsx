@@ -7,6 +7,7 @@ import { Form } from '../../../../components/Form';
 import { InputField } from '../../../../components/Input/InputField';
 import { Button } from '../../../../components/Button';
 import { Delete } from '../../../../icons/Delete';
+import { Close } from '../../../../icons/Close';
 import { useMenu } from '../../hooks/useMenu';
 import { useFormSubmit } from '../../../../components/Form/hooks/useFormSubmit';
 
@@ -28,11 +29,13 @@ const defaultValues = {
 export interface MenuItemFormProps {
   initialValue?: MenuItemFormModel;
   onCancel: () => void;
+  id?: string;
 }
 
 export const MenuItemForm: FC<MenuItemFormProps> = ({
   initialValue,
   onCancel,
+  id,
 }) => {
   const form = useForm<MenuItemFormModel>({
     resolver: zodResolver(validationSchema),
@@ -43,10 +46,15 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
     form.reset(initialValue);
   }, [initialValue]);
 
-  const { addItem } = useMenu();
+  const { addItem, editItem } = useMenu();
 
   const handleSubmit = (data: MenuItemFormModel) => {
-    addItem(data);
+    if (id) {
+      editItem(id, data);
+    } else {
+      addItem(data);
+    }
+
     form.reset(defaultValues);
     onCancel();
   };
@@ -61,7 +69,7 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
         <InputField name="url" label="Link" placeholder="Wklej lub wyszukaj" />
 
         <div className="mt-2 flex gap-2">
-          <Button onClick={() => form.reset(defaultValues)}>Anuluj</Button>
+          <Button onClick={() => form.reset(initialValue)}>Anuluj</Button>
           <Button type="submit" variant="secondary">
             Dodaj
           </Button>
@@ -73,7 +81,7 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
           form.reset(initialValue);
           onCancel();
         }}
-        icon={Delete}
+        icon={id ? Close : Delete}
         borderless
         transparent
       />

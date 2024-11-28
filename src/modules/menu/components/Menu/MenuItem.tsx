@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useMenu } from '../../hooks/useMenu';
-import { Button } from '../../../../components/Button';
 import { Move } from '../../../../icons/Move';
+import { MenuItemForm } from './MenuItemForm';
+import { MenuItemActions } from './MenuItemActions';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -13,40 +14,45 @@ export interface MenuItemProps {
 
 export const MenuItem: FC<MenuItemProps> = ({ id, name, url }) => {
   const { deleteItem } = useMenu();
+  const [isEditing, setIsEditing] = useState(false);
+
   const { setNodeRef, attributes, listeners, transform, transition } =
     useSortable({ id });
 
   return (
     <div
       ref={setNodeRef}
-      className="flex w-full items-center justify-between bg-white px-6 py-4"
+      className="flex w-full flex-col items-stretch bg-white px-6 py-4"
       style={{
         transform: CSS.Transform.toString(transform),
         transition,
       }}
     >
-      <div className="flex items-center gap-3 text-gray-700">
-        <Move {...listeners} {...attributes} />
+      {!isEditing ? (
+        <>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 text-gray-700">
+              <Move {...listeners} {...attributes} />
+              <div>
+                <div className="font-bold text-gray-900">{name}</div>
+                <div>{url}</div>
+              </div>
+            </div>
 
-        <div>
-          <div className="font-bold text-gray-900">{name}</div>
-          <div>{url}</div>
-        </div>
-      </div>
-      <div className="flex">
-        <Button
-          className="!rounded-none !rounded-l-md"
-          onClick={() => deleteItem(id)}
-        >
-          Usuń
-        </Button>
-
-        <Button className="!rounded-none !border-x-0">Edytuj</Button>
-
-        <Button className="!rounded-none !rounded-r-md">
-          Dodaj pozycję menu
-        </Button>
-      </div>
+            <MenuItemActions
+              onAddNew={() => {}}
+              onDelete={() => deleteItem(id)}
+              onEdit={() => setIsEditing(true)}
+            />
+          </div>
+        </>
+      ) : (
+        <MenuItemForm
+          initialValue={{ name, url }}
+          onCancel={() => setIsEditing(false)}
+          id={id}
+        />
+      )}
     </div>
   );
 };

@@ -24,7 +24,7 @@ export interface MenuProps {
 }
 
 export const Menu: FC<MenuProps> = ({ items }) => {
-  const [displayForm, setDisplayForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [menuItems, setMenuItems] = useState(items);
 
   const sensors = useSensors(useSensor(PointerSensor));
@@ -60,16 +60,14 @@ export const Menu: FC<MenuProps> = ({ items }) => {
           </div>
         </SortableContext>
 
-        {displayForm && (
+        {showForm && (
           <div className="bg-gray-50 px-6 py-4">
-            <MenuItemForm onCancel={() => setDisplayForm(false)} />
+            <MenuItemForm onCancel={() => setShowForm(false)} />
           </div>
         )}
 
         <div className="bg-gray-100 px-6 py-5">
-          <Button onClick={() => setDisplayForm(true)}>
-            Dodaj pozycję menu
-          </Button>
+          <Button onClick={() => setShowForm(true)}>Dodaj pozycję menu</Button>
         </div>
       </div>
     </DndContext>
