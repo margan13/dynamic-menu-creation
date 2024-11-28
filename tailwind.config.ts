@@ -1,11 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 export default {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     fontSize: {
       xs: '12px',
@@ -16,8 +12,6 @@ export default {
     },
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
         gray: {
           50: '#F9FAFB',
           100: '#F5F5F5',
@@ -35,8 +29,6 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'monospace'],
         inter: ['var(--font-inter)', 'sans-serif'],
       },
     },

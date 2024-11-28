@@ -54,7 +54,7 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
   const { onSubmit } = useFormSubmit(form, handleSubmit);
 
   return (
-    <div className="flex gap-4 rounded-md border border-gray-200 p-6">
+    <div className="flex items-baseline gap-4 rounded-md border border-gray-200 p-6">
       <Form form={form} onSubmit={onSubmit}>
         <InputField name="name" label="Name" placeholder="np. Promocje" />
 
