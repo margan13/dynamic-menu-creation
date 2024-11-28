@@ -34,6 +34,7 @@ export const Button: FC<ButtonProps> = ({
 
   return (
     <button
+      type="button"
       className={cn(
         `button button-variant-${variant}`,
         { 'button-borderless': borderless },
