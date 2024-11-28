@@ -1,0 +1,27 @@
+.button {
+    @apply relative flex w-fit items-center justify-center gap-1 whitespace-nowrap rounded-md border font-semibold px-4 py-2.5 transition focus-visible:outline disabled:pointer-events-none;
+}
+
+.button-variant-default {
+    @apply bg-white text-gray-800 border-gray-300 hover:border-gray-900 hover:text-gray-900 active:text-white active:bg-gray-300 active:border-gray-300;
+}
+
+.button-variant-primary {
+    @apply bg-purple-500 text-white border-purple-500 hover:bg-purple-300 hover:border-purple-300 active:bg-white active:text-purple-500;
+}
+
+.button-variant-secondary {
+    @apply bg-white text-purple-600 border-purple-300 hover:border-purple-600 active:bg-purple-300 active:text-white active:border-purple-300;
+}
+
+.button-borderless {
+    @apply border-transparent;
+}
+
+.button-transparent {
+    @apply !bg-transparent hover:!border-transparent;
+}
+
+.button-icon-only {
+    @apply px-0;
+}
