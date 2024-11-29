@@ -1,6 +1,7 @@
 import { FormEventHandler, ReactNode } from 'react';
 import { FieldValues, FormProvider, UseFormReturn } from 'react-hook-form';
-import { cn } from '../../utils';
+
+import { cn } from 'src/utils';
 
 export interface FormProps<T extends FieldValues> {
   form: UseFormReturn<T>;

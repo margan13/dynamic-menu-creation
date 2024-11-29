@@ -1,17 +1,18 @@
-import { FC } from 'react';
-import { useUpdateEffect } from 'react-use';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FC } from 'react';
+import { useForm } from 'react-hook-form';
+import { useUpdateEffect } from 'react-use';
 import { object, z } from 'zod';
-import { Form } from '../../../../components/Form';
-import { InputField } from '../../../../components/Input/InputField';
-import { Button } from '../../../../components/Button';
-import { Delete } from '../../../../icons/Delete';
-import { Close } from '../../../../icons/Close';
-import { useMenu } from '../../hooks/useMenu';
-import { useFormSubmit } from '../../../../components/Form/hooks/useFormSubmit';
-import { SearchInput } from '../../../../components/Input/SearchInput';
-import { Search } from '../../../../icons/Search';
+
+import { Button } from 'src/components/Button';
+import { Form } from 'src/components/Form';
+import { useFormSubmit } from 'src/components/Form/hooks/useFormSubmit';
+import { InputField } from 'src/components/Input/InputField';
+import { SearchInput } from 'src/components/Input/SearchInput';
+import { Close } from 'src/icons/Close';
+import { Delete } from 'src/icons/Delete';
+import { Search } from 'src/icons/Search';
+import { useMenu } from 'src/modules/menu/hooks/useMenu';
 
 export interface MenuItemFormModel {
   name: string;

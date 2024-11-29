@@ -4,8 +4,9 @@ import {
   FC,
   PropsWithChildren,
 } from 'react';
-import { cn } from '../../utils';
-import { IconType } from '../../icons/Icon';
+
+import { IconType } from 'src/icons/Icon';
+import { cn } from 'src/utils';
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement> &

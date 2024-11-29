@@ -1,10 +1,11 @@
-import { FC, useState } from 'react';
-import { useMenu } from '../../hooks/useMenu';
-import { Move } from '../../../../icons/Move';
-import { MenuItemForm } from './MenuItemForm';
-import { MenuItemActions } from './MenuItemActions';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { FC, useState } from 'react';
+
+import { Move } from 'src/icons/Move';
+import { MenuItemActions } from 'src/modules/menu/components/Menu/MenuItemActions';
+import { MenuItemForm } from 'src/modules/menu/components/Menu/MenuItemForm';
+import { useMenu } from 'src/modules/menu/hooks/useMenu';
 
 export interface MenuItemProps {
   id: string;

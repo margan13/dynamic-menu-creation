@@ -1,5 +1,6 @@
 import { FieldValues, SubmitHandler, UseFormReturn } from 'react-hook-form';
-import { useErrors } from './useErrors';
+
+import { useErrors } from 'src/components/Form/hooks/useErrors';
 
 export const useFormSubmit = <T extends FieldValues>(
   form: UseFormReturn<T>,

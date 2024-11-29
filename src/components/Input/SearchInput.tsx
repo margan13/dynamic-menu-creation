@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import { Input, InputProps } from 'src/components/Input';
 import { mergeRefs } from 'react-merge-refs';
+
+import { Input, InputProps } from 'src/components/Input';
 
 export interface SearchInputProps extends InputProps {
   suggestions: string[];

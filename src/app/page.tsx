@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu } from '../modules/menu/components/Menu';
-import { MenuItemForm } from '../modules/menu/components/Menu/MenuItemForm';
-import { useMenu } from '../modules/menu/hooks/useMenu';
-import { Button } from '../components/Button';
-import { PlusCircle } from '../icons/PlusCircle';
-import { MenuProvider } from '../modules/menu/providers/MenuProvider';
+
+import { Button } from 'src/components/Button';
+import { PlusCircle } from 'src/icons/PlusCircle';
+import { Menu } from 'src/modules/menu/components/Menu';
+import { MenuItemForm } from 'src/modules/menu/components/Menu/MenuItemForm';
+import { useMenu } from 'src/modules/menu/hooks/useMenu';
+import { MenuProvider } from 'src/modules/menu/providers/MenuProvider';
 
 export default function Home() {
   return (

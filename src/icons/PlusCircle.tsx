@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon, IconProps } from './Icon';
+
+import { Icon, IconProps } from 'src/icons/Icon';
 
 export const PlusCircle = (props: IconProps) => {
   return (

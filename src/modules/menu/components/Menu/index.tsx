@@ -1,11 +1,5 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
-import { Button } from '../../../../components/Button';
-import { MenuItem } from './MenuItem';
-import { MenuItemForm } from './MenuItemForm';
-import { MenuItem as IMenuItem } from '../../providers/MenuProvider';
-
 import {
   DndContext,
   DragEndEvent,
@@ -18,7 +12,13 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { cn } from '../../../../utils';
+import { FC, useEffect, useState } from 'react';
+
+import { Button } from 'src/components/Button';
+import { MenuItem } from 'src/modules/menu/components/Menu/MenuItem';
+import { MenuItemForm } from 'src/modules/menu/components/Menu/MenuItemForm';
+import { MenuItem as IMenuItem } from 'src/modules/menu/providers/MenuProvider';
+import { cn } from 'src/utils';
 
 export interface MenuProps {
   items: IMenuItem[];

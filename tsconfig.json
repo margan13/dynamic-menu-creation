@@ -20,6 +20,9 @@
     "noImplicitAny": false,
     "strictNullChecks": true,
     "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+    },
     "plugins": [
       {
         "name": "next"

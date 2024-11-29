@@ -1,5 +1,6 @@
-import { Button } from '../../../../components/Button';
 import { FC } from 'react';
+
+import { Button } from 'src/components/Button';
 
 export interface MenuItemActionsProps {
   onAddNew: () => void;

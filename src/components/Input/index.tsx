@@ -6,9 +6,10 @@ import React, {
   ReactNode,
 } from 'react';
 import { FieldError } from 'react-hook-form';
-import { InputLabel } from './InputLabel';
-import { InputError } from './InputError';
-import { cn } from '../../utils';
+
+import { InputError } from 'src/components/Input/InputError';
+import { InputLabel } from 'src/components/Input/InputLabel';
+import { cn } from 'src/utils';
 
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {

@@ -1,5 +1,6 @@
 import { FieldError } from 'react-hook-form';
-import { cn } from '../../utils';
+
+import { cn } from 'src/utils';
 
 export interface InputErrorProps {
   error: string | FieldError;
