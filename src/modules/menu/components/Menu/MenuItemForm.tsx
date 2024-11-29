@@ -30,12 +30,14 @@ export interface MenuItemFormProps {
   initialValue?: MenuItemFormModel;
   onCancel: () => void;
   id?: string;
+  parentId?: string | null;
 }
 
 export const MenuItemForm: FC<MenuItemFormProps> = ({
   initialValue,
   onCancel,
   id,
+  parentId = null,
 }) => {
   const form = useForm<MenuItemFormModel>({
     resolver: zodResolver(validationSchema),
@@ -52,7 +54,7 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
     if (id) {
       editItem(id, data);
     } else {
-      addItem(data);
+      addItem(data, parentId);
     }
 
     form.reset(defaultValues);

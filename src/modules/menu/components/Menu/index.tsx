@@ -18,6 +18,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import { cn } from '../../../../utils';
 
 export interface MenuProps {
   items: IMenuItem[];
@@ -41,6 +42,21 @@ export const Menu: FC<MenuProps> = ({ items }) => {
     }
   };
 
+  const renderItems = (items: IMenuItem[], parentId: string | null = null) =>
+    items
+      .filter((item) => item.parentId ?? null === parentId)
+      .map((item) => (
+        <div key={item.id} className={cn(parentId ? 'ml-[64px]' : '')}>
+          <MenuItem
+            id={item.id}
+            name={item.name}
+            url={item.url}
+            parentId={item.parentId}
+          />
+          {renderItems(items, item.id)}
+        </div>
+      ));
+
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <div className="overflow-hidden rounded-md border">
@@ -49,14 +65,7 @@ export const Menu: FC<MenuProps> = ({ items }) => {
           strategy={verticalListSortingStrategy}
         >
           <div className="divide-y divide-gray-200">
-            {menuItems.map((item) => (
-              <MenuItem
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                url={item.url}
-              />
-            ))}
+            {renderItems(menuItems)}
           </div>
         </SortableContext>
 

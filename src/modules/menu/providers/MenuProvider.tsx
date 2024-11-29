@@ -6,11 +6,12 @@ export interface MenuItem {
   id: string;
   name: string;
   url?: string;
+  parentId?: string | null;
 }
 
 interface MenuContextProps {
   items: MenuItem[];
-  addItem: (item: Omit<MenuItem, 'id'>) => void;
+  addItem: (item: Omit<MenuItem, 'id'>, parentId: string | null) => void;
   editItem: (id: string, updatedItem: Omit<MenuItem, 'id'>) => void;
   deleteItem: (id: string) => void;
 }
@@ -31,10 +32,13 @@ export const MenuProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem('menuItems', JSON.stringify(items));
   }, [items]);
 
-  const addItem = (item: Omit<MenuItem, 'id'>) => {
+  const addItem = (
+    item: Omit<MenuItem, 'id'>,
+    parentId: string | null = null,
+  ) => {
     setItems((prevItems) => [
       ...prevItems,
-      { id: (prevItems.length + 1).toString(), ...item },
+      { id: (prevItems.length + 1).toString(), parentId, ...item },
     ]);
   };
 
@@ -47,7 +51,9 @@ export const MenuProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const deleteItem = (id: string) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setItems((prevItems) =>
+      prevItems.filter((item) => item.id !== id && item.parentId !== id),
+    );
   };
 
   return (
