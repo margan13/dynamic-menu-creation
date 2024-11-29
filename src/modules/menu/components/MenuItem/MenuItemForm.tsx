@@ -30,17 +30,17 @@ const defaultValues = {
 };
 
 export interface MenuItemFormProps {
+  itemId?: string;
+  itemParentId?: string | null;
   initialValue?: MenuItemFormModel;
-  onCancel: () => void;
-  id?: string;
-  parentId?: string | null;
+  onCancel?: () => void;
 }
 
 export const MenuItemForm: FC<MenuItemFormProps> = ({
+  itemId,
+  itemParentId = null,
   initialValue,
   onCancel,
-  id,
-  parentId = null,
 }) => {
   const form = useForm<MenuItemFormModel>({
     resolver: zodResolver(validationSchema),
@@ -54,14 +54,14 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
   const { addItem, editItem, items } = useMenu();
 
   const handleSubmit = (data: MenuItemFormModel) => {
-    if (id) {
-      editItem(id, data);
+    if (itemId) {
+      editItem(itemId, data);
     } else {
-      addItem(data, parentId);
+      addItem(data, itemParentId);
     }
 
     form.reset(defaultValues);
-    onCancel();
+    onCancel?.();
   };
 
   const { onSubmit } = useFormSubmit(form, handleSubmit);
@@ -91,9 +91,9 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
       <Button
         onClick={() => {
           form.reset(initialValue);
-          onCancel();
+          onCancel?.();
         }}
-        icon={id ? Close : Delete}
+        icon={itemId ? Close : Delete}
         borderless
         transparent
       />

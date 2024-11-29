@@ -15,8 +15,8 @@ import {
 import { FC, useEffect, useState } from 'react';
 
 import { Button } from 'src/components/Button';
-import { MenuItem } from 'src/modules/menu/components/Menu/MenuItem';
-import { MenuItemForm } from 'src/modules/menu/components/Menu/MenuItemForm';
+import { MenuItem } from 'src/modules/menu/components/MenuItem';
+import { MenuItemForm } from 'src/modules/menu/components/MenuItem/MenuItemForm';
 import { MenuItem as IMenuItem } from 'src/modules/menu/providers/MenuProvider';
 import { cn } from 'src/utils';
 
@@ -36,9 +36,11 @@ export const Menu: FC<MenuProps> = ({ items }) => {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+
     if (over) {
       const oldIndex = menuItems.findIndex((item) => item.id === active.id);
       const newIndex = menuItems.findIndex((item) => item.id === over.id);
+
       if (oldIndex !== newIndex) {
         const updatedItems = arrayMove(menuItems, oldIndex, newIndex);
         setMenuItems(updatedItems);
@@ -52,7 +54,7 @@ export const Menu: FC<MenuProps> = ({ items }) => {
     items
       .filter((item) => item.parentId ?? null === parentId)
       .map((item) => (
-        <div key={item.id} className={cn(parentId ? 'ml-[64px]' : '')}>
+        <div key={item.id} className={cn(parentId ? 'ml-16' : '')}>
           <MenuItem
             id={item.id}
             name={item.name}

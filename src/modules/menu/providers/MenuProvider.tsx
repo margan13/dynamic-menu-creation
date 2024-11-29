@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
 export interface MenuItem {
   id: string;
@@ -21,7 +21,7 @@ export const MenuContext = createContext<MenuContextProps | undefined>(
   undefined,
 );
 
-export const MenuProvider = ({ children }: { children: React.ReactNode }) => {
+export const MenuProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
 

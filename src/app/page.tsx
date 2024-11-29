@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Button } from 'src/components/Button';
 import { PlusCircle } from 'src/icons/PlusCircle';
 import { Menu } from 'src/modules/menu/components/Menu';
-import { MenuItemForm } from 'src/modules/menu/components/Menu/MenuItemForm';
+import { MenuItemForm } from 'src/modules/menu/components/MenuItem/MenuItemForm';
 import { useMenu } from 'src/modules/menu/hooks/useMenu';
 import { MenuProvider } from 'src/modules/menu/providers/MenuProvider';
 
@@ -17,7 +17,7 @@ export default function Home() {
   );
 }
 
-function MenuContent() {
+const MenuContent = () => {
   const { items, loading } = useMenu();
   const [showForm, setShowForm] = useState(false);
 
@@ -57,4 +57,4 @@ function MenuContent() {
       )}
     </>
   );
-}
+};
