@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button } from '../../../../components/Button';
 import { MenuItem } from './MenuItem';
 import { MenuItemForm } from './MenuItemForm';
@@ -28,6 +28,10 @@ export const Menu: FC<MenuProps> = ({ items }) => {
   const [showForm, setShowForm] = useState(false);
   const [menuItems, setMenuItems] = useState(items);
 
+  useEffect(() => {
+    setMenuItems(items);
+  }, [items]);
+
   const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -38,6 +42,8 @@ export const Menu: FC<MenuProps> = ({ items }) => {
       if (oldIndex !== newIndex) {
         const updatedItems = arrayMove(menuItems, oldIndex, newIndex);
         setMenuItems(updatedItems);
+
+        localStorage.setItem('menuItems', JSON.stringify(updatedItems));
       }
     }
   };
