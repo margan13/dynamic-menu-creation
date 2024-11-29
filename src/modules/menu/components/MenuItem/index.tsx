@@ -6,15 +6,23 @@ import { Move } from 'src/icons/Move';
 import { MenuItemActions } from 'src/modules/menu/components/MenuItem/MenuItemActions';
 import { MenuItemForm } from 'src/modules/menu/components/MenuItem/MenuItemForm';
 import { useMenu } from 'src/modules/menu/hooks/useMenu';
+import { cn } from 'src/utils';
 
 export interface MenuItemProps {
   id: string;
   name: string;
   url?: string;
   parentId?: string | null;
+  className?: string;
 }
 
-export const MenuItem: FC<MenuItemProps> = ({ id, name, url, parentId }) => {
+export const MenuItem: FC<MenuItemProps> = ({
+  id,
+  name,
+  url,
+  parentId,
+  className,
+}) => {
   const { deleteItem } = useMenu();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -27,7 +35,10 @@ export const MenuItem: FC<MenuItemProps> = ({ id, name, url, parentId }) => {
     <>
       <div
         ref={setNodeRef}
-        className="flex w-full flex-col items-stretch bg-white px-6 py-4"
+        className={cn(
+          'flex w-full flex-col items-stretch bg-white px-6 py-4',
+          className,
+        )}
         style={{ transform: CSS.Transform.toString(transform), transition }}
       >
         {!isEditing ? (
@@ -59,7 +70,7 @@ export const MenuItem: FC<MenuItemProps> = ({ id, name, url, parentId }) => {
       {showNestedForm && (
         <div className="bg-gray-50 px-6 py-4">
           <MenuItemForm
-            itemParentId={parentId}
+            itemParentId={id}
             onCancel={() => setShowNestedForm(false)}
           />
         </div>

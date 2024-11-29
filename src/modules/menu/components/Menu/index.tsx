@@ -50,9 +50,9 @@ export const Menu: FC<MenuProps> = ({ items }) => {
     }
   };
 
-  const renderItems = (items: IMenuItem[], parentId: string | null = null) =>
-    items
-      .filter((item) => item.parentId ?? null === parentId)
+  const renderItems = (items: IMenuItem[], parentId: string | null = null) => {
+    return items
+      .filter((item) => item.parentId === parentId)
       .map((item) => (
         <div key={item.id} className={cn(parentId ? 'ml-16' : '')}>
           <MenuItem
@@ -60,10 +60,14 @@ export const Menu: FC<MenuProps> = ({ items }) => {
             name={item.name}
             url={item.url}
             parentId={item.parentId}
+            className={cn(
+              parentId ? 'border-t border-l rounded-l-md border-gray-200' : '',
+            )}
           />
-          {renderItems(items, item.id)}
+          {renderItems(items, item.id)} {/* Recursively render child items */}
         </div>
       ));
+  };
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>

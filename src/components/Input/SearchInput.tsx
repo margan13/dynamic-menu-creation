@@ -1,21 +1,25 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { mergeRefs } from 'react-merge-refs';
 
 import { Input, InputProps } from 'src/components/Input';
 
 export interface SearchInputProps extends InputProps {
+  name: string;
   suggestions: string[];
   onSelectSuggestion?: (url: string) => void;
 }
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   function SearchInput(
-    { autoFocus, suggestions = [], onSelectSuggestion, ...props },
+    { name, autoFocus, suggestions = [], onSelectSuggestion, ...props },
     ref,
   ) {
+    const { setValue, watch } = useFormContext(); // Access form methods
     const inputRef = useRef<HTMLInputElement>(null);
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+
+    const inputValue = watch(name);
 
     useEffect(() => {
       if (autoFocus) {
@@ -26,12 +30,12 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setInputValue(value);
+      setValue(name, value);
       setShowSuggestions(!!value);
     };
 
     const handleSelect = (url: string) => {
-      setInputValue(url);
+      setValue(name, url);
       setShowSuggestions(false);
       onSelectSuggestion?.(url);
     };
