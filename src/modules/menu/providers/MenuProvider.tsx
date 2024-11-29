@@ -14,6 +14,7 @@ interface MenuContextProps {
   addItem: (item: Omit<MenuItem, 'id'>, parentId: string | null) => void;
   editItem: (id: string, updatedItem: Omit<MenuItem, 'id'>) => void;
   deleteItem: (id: string) => void;
+  loading: boolean;
 }
 
 export const MenuContext = createContext<MenuContextProps | undefined>(
@@ -22,10 +23,12 @@ export const MenuContext = createContext<MenuContextProps | undefined>(
 
 export const MenuProvider = ({ children }: { children: React.ReactNode }) => {
   const [items, setItems] = useState<MenuItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedItems = localStorage.getItem('menuItems');
     if (storedItems) setItems(JSON.parse(storedItems));
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -57,7 +60,9 @@ export const MenuProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <MenuContext.Provider value={{ items, addItem, editItem, deleteItem }}>
+    <MenuContext.Provider
+      value={{ items, addItem, editItem, deleteItem, loading }}
+    >
       {children}
     </MenuContext.Provider>
   );

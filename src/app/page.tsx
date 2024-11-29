@@ -17,8 +17,16 @@ export default function Home() {
 }
 
 function MenuContent() {
-  const { items } = useMenu();
+  const { items, loading } = useMenu();
   const [showForm, setShowForm] = useState(false);
+
+  if (loading) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <>

@@ -17,7 +17,9 @@ export const useFormSubmit = <T extends FieldValues>(
         form.clearErrors();
         resetErrors();
 
-        return await callback(data);
+        const result = await callback(data);
+
+        return result;
       } catch (error) {
         throw handleErrors(error);
       }

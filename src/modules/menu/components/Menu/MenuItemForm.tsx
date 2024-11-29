@@ -19,7 +19,7 @@ export interface MenuItemFormModel {
 }
 
 const validationSchema = object({
-  name: z.string(),
+  name: z.string().min(1, 'Nazwa jest wymagana'),
   url: z.string().nullable(),
 });
 
