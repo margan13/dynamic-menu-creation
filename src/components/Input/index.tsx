@@ -2,20 +2,21 @@ import React, {
   forwardRef,
   HTMLInputTypeAttribute,
   InputHTMLAttributes,
+  ReactElement,
   ReactNode,
 } from 'react';
 import { FieldError } from 'react-hook-form';
-import { IconType } from '../../icons/Icon';
 import { InputLabel } from './InputLabel';
 import { InputError } from './InputError';
 import { cn } from '../../utils';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   disabled?: boolean;
   error?: string | FieldError;
-  icon?: IconType;
   label?: ReactNode;
   type?: HTMLInputTypeAttribute;
+  prefix?: ReactElement | string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -24,9 +25,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     readOnly,
     disabled = readOnly,
     error,
-    icon: Icon,
     label,
     type = 'text',
+    prefix,
     ...props
   },
   ref,
@@ -46,10 +47,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           className,
         )}
       >
-        {Icon && (
-          <span className="mr-2">
-            <Icon className="fill-current" />
-          </span>
+        {prefix && !props.value && (
+          <div className="mr-1 text-gray-600">{prefix}</div>
         )}
 
         <input

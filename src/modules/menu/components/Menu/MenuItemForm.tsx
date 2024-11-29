@@ -10,6 +10,8 @@ import { Delete } from '../../../../icons/Delete';
 import { Close } from '../../../../icons/Close';
 import { useMenu } from '../../hooks/useMenu';
 import { useFormSubmit } from '../../../../components/Form/hooks/useFormSubmit';
+import { SearchInput } from '../../../../components/Input/SearchInput';
+import { Search } from '../../../../icons/Search';
 
 export interface MenuItemFormModel {
   name: string;
@@ -48,7 +50,7 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
     form.reset(initialValue);
   }, [initialValue]);
 
-  const { addItem, editItem } = useMenu();
+  const { addItem, editItem, items } = useMenu();
 
   const handleSubmit = (data: MenuItemFormModel) => {
     if (id) {
@@ -68,7 +70,14 @@ export const MenuItemForm: FC<MenuItemFormProps> = ({
       <Form form={form} onSubmit={onSubmit}>
         <InputField name="name" label="Name" placeholder="np. Promocje" />
 
-        <InputField name="url" label="Link" placeholder="Wklej lub wyszukaj" />
+        <SearchInput
+          name="url"
+          label="Link"
+          prefix={<Search size={16} />}
+          placeholder="Wklej lub wyszukaj"
+          suggestions={items.map((item) => item.url ?? '')}
+          onSelectSuggestion={(url) => form.setValue('url', url || '')}
+        />
 
         <div className="mt-2 flex gap-2">
           <Button onClick={() => form.reset(initialValue)}>Anuluj</Button>
